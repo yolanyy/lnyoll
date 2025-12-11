@@ -22,6 +22,10 @@
       --max-width: 1080px;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -54,11 +58,31 @@
       }
     }
 
+    /* SCROLL PROGRESS BAR */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      z-index: 40;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .scroll-progress-inner {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(to right, #22c55e, #4ade80, #a7f3d0);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.6);
+      transform-origin: left;
+    }
+
     /* NAVBAR */
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 30;
       backdrop-filter: blur(14px);
       background: linear-gradient(
         to bottom,
@@ -66,8 +90,17 @@
         rgba(2, 6, 23, 0.75),
         transparent
       );
-      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.7);
       margin-bottom: 24px;
+      transition: background 180ms ease-out, border-color 180ms ease-out,
+        box-shadow 180ms ease-out, transform 180ms ease-out;
+    }
+
+    .navbar.scrolled {
+      background: rgba(2, 6, 23, 0.97);
+      border-bottom-color: rgba(30, 64, 175, 0.6);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+      transform: translateY(-1px);
     }
 
     .navbar-inner {
@@ -290,6 +323,61 @@
       margin-bottom: 16px;
     }
 
+    .btn-primary {
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(34, 197, 94, 0.9);
+      background: radial-gradient(circle at 30% 0, #22c55e, #059669);
+      color: #ecfdf5;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow:
+        0 14px 35px rgba(34, 197, 94, 0.45),
+        0 0 0 1px rgba(15, 23, 42, 0.7);
+      transition:
+        transform 180ms ease-out,
+        box-shadow 180ms ease-out,
+        filter 180ms ease-out,
+        background 180ms ease-out;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow:
+        0 20px 45px rgba(34, 197, 94, 0.65),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-secondary {
+      padding: 9px 16px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition:
+        background 180ms ease-out,
+        border 180ms ease-out,
+        color 180ms ease-out,
+        transform 180ms ease-out;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: rgba(55, 65, 81, 1);
+      color: #e5e7eb;
+      transform: translateY(-0.5px);
+    }
+
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
@@ -418,6 +506,18 @@
       align-items: center;
       justify-content: space-between;
       gap: 6px;
+      transition:
+        border 180ms ease-out,
+        background 180ms ease-out,
+        transform 180ms ease-out,
+        box-shadow 180ms ease-out;
+    }
+
+    .skill-pill:hover {
+      border-color: rgba(55, 65, 81, 1);
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
     }
 
     .skill-pill span {
@@ -459,14 +559,18 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      transition: border var(--transition), background var(--transition),
-        transform var(--transition);
+      transition:
+        border 180ms ease-out,
+        background 180ms ease-out,
+        transform 180ms ease-out,
+        box-shadow 180ms ease-out;
     }
 
     .project-item:hover {
       border-color: rgba(55, 65, 81, 1);
       background: rgba(15, 23, 42, 1);
-      transform: translateY(-0.5px);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
     }
 
     .project-meta {
@@ -634,14 +738,18 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-      transition: border var(--transition), transform var(--transition),
-        box-shadow var(--transition), background var(--transition);
       cursor: pointer;
+      transition:
+        border 180ms ease-out,
+        transform 180ms ease-out,
+        box-shadow 180ms ease-out,
+        background 180ms ease-out,
+        translate 180ms ease-out;
     }
 
     .project-card:hover {
       border-color: rgba(55, 65, 81, 1);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
       box-shadow: 0 14px 34px rgba(15, 23, 42, 0.95);
       background: rgba(15, 23, 42, 1);
     }
@@ -686,15 +794,20 @@
       align-items: center;
       gap: 6px;
       color: var(--text-soft);
-      transition: border var(--transition), color var(--transition),
-        background var(--transition), transform var(--transition);
+      transition:
+        border 180ms ease-out,
+        color 180ms ease-out,
+        background 180ms ease-out,
+        transform 180ms ease-out,
+        box-shadow 180ms ease-out;
     }
 
     .contact-item:hover {
       border-color: rgba(55, 65, 81, 1);
       color: #e5e7eb;
       background: rgba(15, 23, 42, 1);
-      transform: translateY(-0.5px);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
     }
 
     .contact-dot {
@@ -702,6 +815,25 @@
       height: 6px;
       border-radius: 999px;
       background: rgba(148, 163, 184, 0.9);
+    }
+
+    /* FADE-IN ANIMATIONS */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(18px) scale(0.99);
+      filter: blur(4px);
+      transition:
+        opacity 0.7s ease-out,
+        transform 0.7s ease-out,
+        filter 0.7s ease-out;
+      transition-delay: var(--delay, 0s);
+      will-change: opacity, transform, filter;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
 
     footer {
@@ -717,6 +849,11 @@
   </style>
 </head>
 <body>
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress">
+    <div class="scroll-progress-inner"></div>
+  </div>
+
   <header class="navbar">
     <div class="navbar-inner">
       <div class="brand">
@@ -746,7 +883,7 @@
     <div class="layout">
       <!-- LEFT: HERO + MAIN CONTENT -->
       <section>
-        <div class="card">
+        <div class="card fade-section" style="--delay: 0.05s;">
           <div class="card-inner">
             <div class="hero-pill">
               <span>Portfolio</span>
@@ -767,39 +904,11 @@
             </p>
 
             <div class="hero-actions">
-              <a href="#contact" class="btn-primary" style="
-                padding: 9px 18px;
-                border-radius: 999px;
-                border: 1px solid rgba(34, 197, 94, 0.9);
-                background: radial-gradient(circle at 30% 0, #22c55e, #059669);
-                color: #ecfdf5;
-                font-size: 13px;
-                font-weight: 600;
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                cursor: pointer;
-                box-shadow:
-                  0 14px 35px rgba(34, 197, 94, 0.45),
-                  0 0 0 1px rgba(15, 23, 42, 0.7);
-                text-decoration: none;
-              ">
+              <a href="#contact" class="btn-primary">
                 Contact me
                 <span>→</span>
               </a>
-              <a href="#projects" class="btn-secondary" style="
-                padding: 9px 16px;
-                border-radius: 999px;
-                border: 1px solid rgba(31, 41, 55, 0.95);
-                background: rgba(15, 23, 42, 0.9);
-                color: var(--text-soft);
-                font-size: 13px;
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                cursor: pointer;
-                text-decoration: none;
-              ">
+              <a href="#projects" class="btn-secondary">
                 View projects
               </a>
             </div>
@@ -820,7 +929,7 @@
         <!-- Sections -->
         <div class="sections">
           <!-- ABOUT -->
-          <section id="about" class="section-card">
+          <section id="about" class="section-card fade-section" style="--delay: 0.1s;">
             <div class="section-header">
               <h2 class="section-title">About</h2>
               <div class="section-subtitle">Get to know me</div>
@@ -848,7 +957,7 @@
           </section>
 
           <!-- EXPERIENCE -->
-          <section id="experience" class="section-card">
+          <section id="experience" class="section-card fade-section" style="--delay: 0.16s;">
             <div class="section-header">
               <h2 class="section-title">Experience</h2>
               <div class="section-subtitle">Things I've done so far</div>
@@ -893,7 +1002,7 @@
           </section>
 
           <!-- SECURITY RESEARCH -->
-          <section id="security" class="section-card">
+          <section id="security" class="section-card fade-section" style="--delay: 0.22s;">
             <div class="section-header">
               <h2 class="section-title">Security</h2>
               <div class="section-subtitle">Security research & bug exploration</div>
@@ -925,7 +1034,7 @@
           </section>
 
           <!-- PROJECTS -->
-          <section id="projects" class="section-card">
+          <section id="projects" class="section-card fade-section" style="--delay: 0.28s;">
             <div class="section-header">
               <h2 class="section-title">Projects</h2>
               <div class="section-subtitle">Selected works</div>
@@ -1000,7 +1109,7 @@
           </section>
 
           <!-- CONTACT -->
-          <section id="contact" class="section-card">
+          <section id="contact" class="section-card fade-section" style="--delay: 0.34s;">
             <div class="section-header">
               <h2 class="section-title">Contact</h2>
               <div class="section-subtitle">Let's work together</div>
@@ -1014,9 +1123,9 @@
               <div class="contact-links">
                 <a class="contact-item" href="mailto:emailkamu@example.com">
                   <span class="contact-dot"></span>
-                  <span>yolan..maulana@gmail.com</span>
+                  <span>emailkamu@example.com</span>
                 </a>
-                <a class="contact-item" href="https://wa.me/6287761157460" target="_blank">
+                <a class="contact-item" href="https://wa.me/62xxxxxxxxxxx" target="_blank">
                   <span class="contact-dot"></span>
                   <span>WhatsApp</span>
                 </a>
@@ -1036,7 +1145,7 @@
 
       <!-- RIGHT: SKILLS & QUICK PROJECTS -->
       <aside>
-        <div class="side-card">
+        <div class="side-card fade-section" style="--delay: 0.18s;">
           <div class="side-inner">
             <div class="side-header">
               <div class="side-title">Snapshot</div>
@@ -1112,7 +1221,45 @@
   </main>
 
   <script>
+    // Tahun footer
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll progress bar
+    const progressBar = document.querySelector(".scroll-progress-inner");
+    const navbar = document.querySelector(".navbar");
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + "%";
+
+      if (scrollTop > 12) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+
+    // Fade-in intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.18,
+      }
+    );
+
+    document.querySelectorAll(".fade-section").forEach((el) => {
+      observer.observe(el);
+    });
   </script>
 </body>
 </html>
