@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio Yolan</title>
+  <style>
+    :root {
+      --bg: #020817;
+      --bg-soft: #020617;
+      --bg-card: #020617;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.12);
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border: #1f2937;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --radius-full: 999px;
+      --transition: 180ms ease-out;
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1220 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding: 32px 16px 80px;
+      }
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.95),
+        rgba(2, 6, 23, 0.75),
+        transparent
+      );
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+      margin-bottom: 24px;
+    }
+
+    .navbar-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      background: radial-gradient(circle at 30% 0, #22c55e, #16a34a 35%, #111827 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #e5fdf2;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.5),
+        0 12px 28px rgba(34, 197, 94, 0.45);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #f9fafb;
+    }
+
+    .brand-role {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .nav-links {
+      display: none;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 2px;
+      transition: color var(--transition);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(to right, #22c55e, #4ade80);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: #e5e7eb;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .nav-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12),
+        0 0 0 8px rgba(34, 197, 94, 0.06);
+    }
+
+    /* LAYOUT GRID */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr);
+      gap: 20px;
+    }
+
+    @media (min-width: 900px) {
+      .layout {
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        align-items: start;
+      }
+    }
+
+    /* CARD */
+    .card {
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 24px 22px 24px;
+      }
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.12;
+      background:
+        radial-gradient(circle at 0 0, rgba(74, 222, 128, 0.6), transparent 50%),
+        radial-gradient(circle at 70% 10%, rgba(16, 185, 129, 0.5), transparent 50%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* HERO */
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 11px;
+      border-radius: var(--radius-full);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.7);
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+
+    .hero-pill span {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.16);
+      color: #bbf7d0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 34px;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 540px;
+      margin-bottom: 16px;
+    }
+
+    .hero-highlight {
+      color: #bbf7d0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .hero-meta-item {
+      padding: 6px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(31, 41, 55, 0.7);
+      background: rgba(15, 23, 42, 0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot-green {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+    }
+
+    .badge-soft {
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(31, 41, 55, 0.85);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* RIGHT PANEL */
+    .side-card {
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .side-card {
+        padding: 20px 18px 20px;
+      }
+    }
+
+    .side-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.16;
+      background:
+        radial-gradient(circle at 100% 0, rgba(74, 222, 128, 0.7), transparent 55%),
+        radial-gradient(circle at 0 100%, rgba(37, 99, 235, 0.35), transparent 50%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .side-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .side-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+
+    .side-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+
+    .side-status {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(22, 163, 74, 0.14);
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      color: #bbf7d0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .side-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+    }
+
+    .side-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .skill-pill {
+      padding: 7px 10px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      font-size: 11px;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .skill-pill span {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(31, 41, 55, 0.95);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .side-divider {
+      height: 1px;
+      border-radius: 999px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(31, 41, 55, 0.9),
+        transparent
+      );
+      margin: 10px 0 14px;
+    }
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .project-item {
+      padding: 8px 9px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border var(--transition), background var(--transition),
+        transform var(--transition);
+    }
+
+    .project-item:hover {
+      border-color: rgba(55, 65, 81, 1);
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-0.5px);
+    }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .project-name {
+      font-size: 11px;
+    }
+
+    .project-stack {
+      font-size: 10px;
+      color: var(--text-soft);
+    }
+
+    .project-badge {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(31, 41, 55, 0.96);
+    }
+
+    .side-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .side-footer a {
+      font-size: 11px;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    /* MAIN CONTENT SECTIONS */
+    .sections {
+      margin-top: 26px;
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .sections {
+        margin-top: 32px;
+        gap: 16px;
+      }
+    }
+
+    .section-card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 18px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 16px 14px 15px;
+    }
+
+    @media (min-width: 768px) {
+      .section-card {
+        padding: 18px 16px 16px;
+      }
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+    }
+
+    .section-subtitle {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .section-body {
+      font-size: 13px;
+      color: #d1d5db;
+    }
+
+    .section-body p + p {
+      margin-top: 8px;
+    }
+
+    .timeline {
+      margin-top: 10px;
+      display: grid;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 10px;
+    }
+
+    .timeline-marker {
+      width: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .timeline-dot {
+      margin-top: 3px;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08);
+    }
+
+    .timeline-content {
+      flex: 1;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed rgba(31, 41, 55, 0.8);
+    }
+
+    .timeline-title {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .timeline-meta {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 1px;
+    }
+
+    .timeline-desc {
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .projects-grid {
+      margin-top: 10px;
+      display: grid;
+      gap: 10px;
+    }
+
+    @media (min-width: 700px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .project-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 14px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 10px 10px 9px;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border var(--transition), transform var(--transition),
+        box-shadow var(--transition), background var(--transition);
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      border-color: rgba(55, 65, 81, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .project-card-title {
+      font-weight: 500;
+    }
+
+    .project-card-desc {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .project-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .project-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(31, 41, 55, 0.96);
+    }
+
+    .contact-links {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .contact-item {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: rgba(15, 23, 42, 0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-soft);
+      transition: border var(--transition), color var(--transition),
+        background var(--transition), transform var(--transition);
+    }
+
+    .contact-item:hover {
+      border-color: rgba(55, 65, 81, 1);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-0.5px);
+    }
+
+    .contact-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.9);
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 11px;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    footer span {
+      color: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand">
+        <div class="brand-logo">YM</div>
+        <div class="brand-text">
+          <div class="brand-name">Yolan Maulana</div>
+          <div class="brand-role">Web Developer & Web3 Ops</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#security">Security</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-pill">
+        <div class="nav-dot"></div>
+        <span>Remote @ Bybit</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="layout">
+      <!-- LEFT: HERO + MAIN CONTENT -->
+      <section>
+        <div class="card">
+          <div class="card-inner">
+            <div class="hero-pill">
+              <span>Portfolio</span>
+              <div>Building things on the web & web3 space</div>
+            </div>
+
+            <h1 class="hero-title">
+              Hi, I'm <span class="hero-highlight">Yolan</span><br />
+              I turn ideas into <span class="hero-highlight">usable products</span>.
+            </h1>
+
+            <p class="hero-subtitle">
+              Web developer dengan latar belakang Sistem Informasi, saat ini
+              bekerja remote di <strong>Bybit</strong> dan fokus di alur operasional
+              keuangan & web3. Suka menyederhanakan flow yang rumit jadi tampilan
+              dan proses yang enak dipakai, sambil membangun mindset keamanan lewat
+              eksplorasi bug & security research.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#contact" class="btn-primary" style="
+                padding: 9px 18px;
+                border-radius: 999px;
+                border: 1px solid rgba(34, 197, 94, 0.9);
+                background: radial-gradient(circle at 30% 0, #22c55e, #059669);
+                color: #ecfdf5;
+                font-size: 13px;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                box-shadow:
+                  0 14px 35px rgba(34, 197, 94, 0.45),
+                  0 0 0 1px rgba(15, 23, 42, 0.7);
+                text-decoration: none;
+              ">
+                Contact me
+                <span>→</span>
+              </a>
+              <a href="#projects" class="btn-secondary" style="
+                padding: 9px 16px;
+                border-radius: 999px;
+                border: 1px solid rgba(31, 41, 55, 0.95);
+                background: rgba(15, 23, 42, 0.9);
+                color: var(--text-soft);
+                font-size: 13px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                text-decoration: none;
+              ">
+                View projects
+              </a>
+            </div>
+
+            <div class="hero-meta">
+              <div class="hero-meta-item">
+                <div class="dot-green"></div>
+                Working remote at Bybit · Web3 operations
+              </div>
+              <div class="hero-meta-item">
+                <span class="badge-soft">Base</span>
+                Indonesia · GMT+7
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sections -->
+        <div class="sections">
+          <!-- ABOUT -->
+          <section id="about" class="section-card">
+            <div class="section-header">
+              <h2 class="section-title">About</h2>
+              <div class="section-subtitle">Get to know me</div>
+            </div>
+            <div class="section-body">
+              <p>
+                Saya seorang pengembang dengan latar belakang Sistem Informasi,
+                terbiasa menggabungkan sudut pandang bisnis dan teknis. Mulai
+                dari membangun website portofolio, sistem informasi penjualan
+                properti, hingga alur transaksi terkait aset web3.
+              </p>
+              <p>
+                Selain itu, saya juga aktif melakukan <strong>security research</strong> pada
+                berbagai aplikasi global seperti PayPal, Booking.com, dan WeSing.
+                Fokusnya adalah memahami bagaimana layanan besar menangani
+                transaksi, autentikasi, serta integritas data untuk membangun
+                mindset keamanan yang kuat di setiap project yang saya kerjakan.
+              </p>
+              <p>
+                Tujuan utama saya sederhana: membuat solusi digital yang
+                realistis, aman, dan benar-benar bisa dipakai—baik oleh bisnis
+                kecil maupun platform berskala besar.
+              </p>
+            </div>
+          </section>
+
+          <!-- EXPERIENCE -->
+          <section id="experience" class="section-card">
+            <div class="section-header">
+              <h2 class="section-title">Experience</h2>
+              <div class="section-subtitle">Things I've done so far</div>
+            </div>
+            <div class="section-body">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-marker">
+                    <div class="timeline-dot"></div>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">
+                      Financial Transaction Specialist · Bybit (Remote)
+                    </div>
+                    <div class="timeline-meta">2023 – Sekarang · Remote</div>
+                    <div class="timeline-desc">
+                      Mengelola alur deposit/withdraw, P2P, dan dokumentasi
+                      transaksi untuk ekosistem web3 di Bybit. Fokus pada keamanan,
+                      efisiensi, dan kepatuhan regulasi lintas bank & platform.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-marker">
+                    <div class="timeline-dot"></div>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">
+                      Web Developer · Side Project
+                    </div>
+                    <div class="timeline-meta">2022 – Sekarang</div>
+                    <div class="timeline-desc">
+                      Membangun website statis sampai dinamis: portofolio,
+                      website informasi penjualan properti, sistem pengelolaan
+                      keuangan usaha, dan platform digitalisasi UMKM.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECURITY RESEARCH -->
+          <section id="security" class="section-card">
+            <div class="section-header">
+              <h2 class="section-title">Security</h2>
+              <div class="section-subtitle">Security research & bug exploration</div>
+            </div>
+            <div class="section-body">
+              <p>
+                Saya memiliki ketertarikan kuat pada analisis keamanan aplikasi,
+                terutama pada platform pembayaran dan layanan global. Beberapa
+                aplikasi yang pernah saya teliti meliputi <strong>PayPal</strong>,
+                <strong>Booking.com</strong>, <strong>WeSing</strong>, dan berbagai
+                platform lainnya.
+              </p>
+              <p>
+                Fokusnya adalah menemukan inkonsistensi, edge-case vulnerability,
+                dan potensi risiko operasional secara aman—tanpa eksploitasi—untuk
+                memahami bagaimana sistem besar menangani transaksi, auth flow,
+                validasi data, dan mekanisme risk-control.
+              </p>
+              <p>
+                Minat ini menguatkan kemampuan saya dalam:
+              </p>
+              <ul style="margin-top:6px; padding-left:18px; font-size:12px; color:#e5e7eb;">
+                <li>Membaca dan memetakan alur sistem secara menyeluruh</li>
+                <li>Menemukan dan menguji celah logika pada aplikasi</li>
+                <li>Membuat bot otomatis untuk simulasi &amp; stress test</li>
+                <li>Membangun security-aware mindset di web3, fintech, dan e-commerce</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- PROJECTS -->
+          <section id="projects" class="section-card">
+            <div class="section-header">
+              <h2 class="section-title">Projects</h2>
+              <div class="section-subtitle">Selected works</div>
+            </div>
+            <div class="section-body">
+              <div class="projects-grid">
+                <a class="project-card" href="#" target="_blank">
+                  <div class="project-card-title">Property Info Website</div>
+                  <div class="project-card-desc">
+                    Website dinamis untuk menampilkan informasi penjualan
+                    properti. Terdapat fitur upload properti oleh user dengan
+                    proses approval admin.
+                  </div>
+                  <div class="project-card-footer">
+                    <span class="project-tag">PHP · MySQL</span>
+                    <span>→</span>
+                  </div>
+                </a>
+
+                <a class="project-card" href="#" target="_blank">
+                  <div class="project-card-title">Web3 Flow Dashboard</div>
+                  <div class="project-card-desc">
+                    Dashboard internal untuk memantau alur deposit, withdraw,
+                    dan catatan transaksi lintas bank & exchange dalam konteks web3.
+                  </div>
+                  <div class="project-card-footer">
+                    <span class="project-tag">HTML · JS</span>
+                    <span>→</span>
+                  </div>
+                </a>
+
+                <a class="project-card" href="#" target="_blank">
+                  <div class="project-card-title">UMKM Sales Digitalization</div>
+                  <div class="project-card-desc">
+                    Platform sederhana untuk mendigitalisasi penjualan UMKM:
+                    katalog produk, manajemen pesanan, riwayat transaksi, dan
+                    laporan penjualan dasar.
+                  </div>
+                  <div class="project-card-footer">
+                    <span class="project-tag">PHP · MySQL</span>
+                    <span>→</span>
+                  </div>
+                </a>
+
+                <a class="project-card" href="#" target="_blank">
+                  <div class="project-card-title">Finance Tracker App</div>
+                  <div class="project-card-desc">
+                    Aplikasi web untuk mencatat pemasukan, pengeluaran, dan
+                    membuat ringkasan laporan usaha kecil.
+                  </div>
+                  <div class="project-card-footer">
+                    <span class="project-tag">Web App</span>
+                    <span>→</span>
+                  </div>
+                </a>
+
+                <a class="project-card" href="#" target="_blank">
+                  <div class="project-card-title">App Bug Hunting & Automation Research</div>
+                  <div class="project-card-desc">
+                    Project eksploratif untuk menganalisis keamanan aplikasi
+                    populer seperti PayPal, Booking.com, dan WeSing. Menggunakan
+                    bot otomatis untuk menguji skenario transaksi & edge-case
+                    secara terukur dalam lingkungan yang aman.
+                  </div>
+                  <div class="project-card-footer">
+                    <span class="project-tag">Security · Automation</span>
+                    <span>→</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- CONTACT -->
+          <section id="contact" class="section-card">
+            <div class="section-header">
+              <h2 class="section-title">Contact</h2>
+              <div class="section-subtitle">Let's work together</div>
+            </div>
+            <div class="section-body">
+              <p>
+                Punya ide project, butuh website, atau ingin diskusi soal alur
+                transaksi web3, digitalisasi bisnis, atau keamanan aplikasi?
+                Silakan hubungi saya lewat salah satu kanal di bawah ini.
+              </p>
+              <div class="contact-links">
+                <a class="contact-item" href="mailto:emailkamu@example.com">
+                  <span class="contact-dot"></span>
+                  <span>yolan..maulana@gmail.com</span>
+                </a>
+                <a class="contact-item" href="https://wa.me/6287761157460" target="_blank">
+                  <span class="contact-dot"></span>
+                  <span>WhatsApp</span>
+                </a>
+                <a class="contact-item" href="https://github.com/username" target="_blank">
+                  <span class="contact-dot"></span>
+                  <span>GitHub</span>
+                </a>
+                <a class="contact-item" href="https://www.linkedin.com/in/username" target="_blank">
+                  <span class="contact-dot"></span>
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- RIGHT: SKILLS & QUICK PROJECTS -->
+      <aside>
+        <div class="side-card">
+          <div class="side-inner">
+            <div class="side-header">
+              <div class="side-title">Snapshot</div>
+              <div class="side-status">
+                <div class="side-status-dot"></div>
+                Actively building
+              </div>
+            </div>
+
+            <div>
+              <div class="side-section-title">Skills</div>
+              <div class="skills-grid">
+                <div class="skill-pill">
+                  <span>Web Dev</span>
+                  <span>Core</span>
+                </div>
+                <div class="skill-pill">
+                  <span>PHP · MySQL</span>
+                  <span>Backend</span>
+                </div>
+                <div class="skill-pill">
+                  <span>HTML · CSS · JS</span>
+                  <span>Frontend</span>
+                </div>
+                <div class="skill-pill">
+                  <span>Web3 Flow</span>
+                  <span>Domain</span>
+                </div>
+              </div>
+
+              <div class="side-divider"></div>
+
+              <div class="side-section-title">Mini Projects</div>
+              <div class="project-list">
+                <div class="project-item">
+                  <div class="project-meta">
+                    <div class="project-name">Blum Points Helper</div>
+                    <div class="project-stack">Tools · Web3</div>
+                  </div>
+                  <div class="project-badge">Side</div>
+                </div>
+
+                <div class="project-item">
+                  <div class="project-meta">
+                    <div class="project-name">RizalShoes Finance</div>
+                    <div class="project-stack">Business · Dashboard</div>
+                  </div>
+                  <div class="project-badge">Beta</div>
+                </div>
+
+                <div class="project-item">
+                  <div class="project-meta">
+                    <div class="project-name">Personal CV Site</div>
+                    <div class="project-stack">Portfolio</div>
+                  </div>
+                  <div class="project-badge">Live</div>
+                </div>
+              </div>
+
+              <div class="side-footer">
+                <div>Last update · 2025</div>
+                <a href="#projects">See full projects →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year"></span> <span>Yolan Maulana</span>. Built with plain HTML & CSS.
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
